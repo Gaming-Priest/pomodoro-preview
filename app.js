@@ -202,7 +202,7 @@ class App extends Component {
        />
        <audio 
        id={this.state.id}
-       src="./res/assets/Wecker-sound.mp3"
+       src="https://raw.githubusercontent.com/Gaming-Priest/pomodoro-preview/master/res/assets/Wecker-sound.mp3"
        ref="clockSound"
        preload="auto"
        />
