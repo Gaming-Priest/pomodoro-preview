@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  padding: 0;
 }
 
 #app {
@@ -7,14 +8,10 @@
   justify-content: center;
   width: 100%;
 }
-#app button {
-  background: none;
-  outline: none;
-  border: none;
-  color: white;
+.click{
+  color: black;
+  margin: 5px;
   cursor: pointer;
-  width: auto;
-  height: auto;
 }
 
 

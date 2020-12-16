@@ -2,45 +2,37 @@ import React, { Component } from "react";
 import ReactDOM from 'react-dom'
 import Banner from './banner'
 
+
+//accurateInterval
 function accurateInterval(func, interval, opts) {
-
    if (!opts) opts = {};
-
    var clear, nextAt, timeout, wrapper, now;
-
    now = new Date().getTime();
-
    nextAt = now;
-
    if (opts.aligned) {
       nextAt += interval - (now % interval);
    }
    if (!opts.immediate) {
       nextAt += interval;
    }
-
    timeout = null;
-
    wrapper = function wrapper() {
       var scheduledTime = nextAt;
       nextAt += interval;
       timeout = setTimeout(wrapper, nextAt - new Date().getTime());
       func(scheduledTime);
    };
-
    clear = function clear() {
       return clearTimeout(timeout);
    };
-
    timeout = setTimeout(wrapper, nextAt - new Date().getTime());
-
    return {
       clear: clear
    };
 
 };
-
-// APP COMPONENTS
+//
+// // APP COMPONENTS
 
 class App extends Component {
    constructor(props) {
@@ -50,11 +42,11 @@ class App extends Component {
          sessionInt: 25,
          counterColor: { color: 'wheat' },
          timer: 1500,
-         intID: null,
+         intID: '',
          isRunning: false,
          clockFace: 'session',
-         id:'beep',
-         src:'https://raw.githubusercontent.com/Gaming-Priest/FCC-25-5-CLOCK/master/src/res/assets/Wecker-sound.mp3'
+         id: 'beep',
+         src: 'https://raw.githubusercontent.com/Gaming-Priest/FCC-25-5-CLOCK/master/src/res/assets/Wecker-sound.mp3'
       }
       this.startClock = this.startClock.bind(this);
       this.decrementTimer = this.decrementTimer.bind(this);
@@ -74,7 +66,7 @@ class App extends Component {
          intID: accurateInterval(() => {
             this.decrementTimer()
             this.clockFaceControl()
-         }, 1000, { aligned: true, immediate: true })
+         }, 1000)
       });
    };
 
@@ -92,10 +84,10 @@ class App extends Component {
             this.state.intID.clear()
          }
          if (this.state.clockFace === 'session') {
-            this.switchClockFace('break', (this.state.breakInt * 60))
+            this.switchClockFace('break', this.state.breakInt * 60)
             this.startClock()
          } else {
-            this.switchClockFace('session', (this.state.sessionInt * 60))
+            this.switchClockFace('session', this.state.sessionInt * 60)
             this.startClock()
          }
       }
@@ -158,69 +150,63 @@ class App extends Component {
       let seconds = this.state.timer - minutes * 60
       minutes = minutes < 10 ? '0' + minutes : minutes
       seconds = seconds > 59 || seconds < 10 ? '0' + seconds : seconds
-      return `${minutes} : ${seconds}`
+      return minutes + ':' + seconds
    };
 
    warning(int) {
       if (int < 61) {
-         this.setState({
-            counterColor: { color: '#F21515' }
-         })
+         this.setState({ counterColor: { color: '#F21515' } });
+      } else {
+         this.setState({ counterColor: { color: wheat } });
       }
-   };
+   }
 
    buzzer(int) {
       if (int === 0) {
-        this.state.id.play();
-
+         this.refs.clockSound.play();
       }
    };
 
-   reset()
-   {
+   reset() {
       this.setState({
          timer: 1500,
          breakInt: 5,
-         clockFace: 'session',
-         clockState: 'stopped',
          sessionInt: 25,
-         counterColor: { color: 'wheat' },
-         intID: null
+         isRunning: false,
+         clockFace: 'session',
+         intID: ''
       })
       if (this.state.intID) {
          this.state.intID.clear()
       }
-     this.state.id.pause()
-     this.state.id.currentTime = 0;
+      this.refs.clockSound.pause();
+      this.refs.clockSound.currentTime = 0;
    };
 
-   render()
-   {
+   render(){
       return (
-         <React.Fragment>
-<Banner
-    breakLen={this.state.breakInt}
-    sessionLen={this.state.sessionInt}
-    timeLeft={this.clockTime()}
-    style={this.state.counterColor}
-    increment={this.increment}
-    decrement={this.decrement}
-    reset={this.reset}
-    start_stop={this.clockControl}
-    clock_label={this.state.clockFace}
-     />
-     <audio 
-     id={this.state.id}
-     src={this.state.src}
-     preload="auto"
-     />
-     </React.Fragment>
-    );
+   <React.Fragment>
+   <Banner
+       breakLen={this.state.breakInt}
+       sessionLen={this.state.sessionInt}
+       timeLeft={this.clockTime()}
+       style={this.state.counterColor}
+       increment={this.increment}
+       decrement={this.decrement}
+       reset={this.reset}
+       start_stop={this.clockControl}
+       clock_label={this.state.clockFace}
+       />
+       <audio 
+       id={this.state.id}
+       src="/res/assets/Wecker-sound.wav"
+       ref="clockSound"
+       preload="auto"
+       />
+    </React.Fragment>
+      );
    }
-}
-
+};
 
 var mountNode = document.getElementById("app");
 ReactDOM.render(<App />, mountNode);
-
-//
