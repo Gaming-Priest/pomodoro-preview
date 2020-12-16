@@ -1,89 +1,118 @@
 * {
-  margin: 0;
-  padding: 0;
+   margin: 0;
 }
 
 #app {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+   display: flex;
+   justify-content: center;
+   width: 100%;
 }
-.click{
-  color: black;
-  margin: 5px;
-  cursor: pointer;
-}
-
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-items: center;
-  border: 1px solid;
-  width: 80%;
-  margin: 20px;
-  border-radius: 20px;
-  background-color: #000648E8;
-  color: wheat;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-items: center;
+   border: 1px solid;
+   width: 80%;
+   margin: 20px;
+   border-radius: 20px;
+   background-color: #000648E8;
+   color: wheat;
 }
 
 .controls {
-  display: flex;
-  justify-content: space-evenly;
-  width: 90%;
-  margin: 16px;
-  background-color: #39419AF0;
-  border-radius: 20px;
-  border: 1px solid;
+   display: flex;
+   justify-content: space-evenly;
+   width: 90%;
+   margin: 16px;
+   background-color: #39419AF0;
+   border-radius: 20px;
+   border: 1px solid;
 }
 
 .break-container,
 .session-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  border-radius: 20px;
-  border: 1px inset;
-  background-color: #2330C582;
-  width: 40%;
-  margin: 20px;
-  height: 150px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   text-align: center;
+   border-radius: 20px;
+   border: 1px inset;
+   background-color: #2330C582;
+   width: 120px;
+   margin: 10px;
+   height: 150px;
+}
+
+.break-container button ,
+.session-container button {
+   background: none;
+   margin: 0 7px;
+   font-weight: bold;
+   font-size: 15px;
+   padding: 0;
+   outline: none;
+   border: 1px solid;
+   color: white;
+   border-radius: 10px;
+   background-color: green;
+   cursor: pointer;
+   z-index: 5;
 }
 
 .break,
 .session {
-  display: flex;
-  width: 40%;
-  margin: 8px;
-  align-self: center;
-  justify-content: space-evenly;
+   display: flex;
+   align-self: center;
+   justify-content: space-evenly;
+}
+
+.break-container h4{
+   margin-bottom: 15px;
 }
 
 .timer-container {
-  width: 60%;
-  margin: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  text-align: center;
-  height: 150px;
-  border-radius: 20px;
-  background-color: #39419AF0;
-  border: 1px solid;
-}
-.timer-controls{
-  display: flex;
-  justify-content: space-between;
-  width: 60%;
+   width: 60%;
+   margin: 20px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   align-items: center;
+   text-align: center;
+   height: 150px;
+   border-radius: 20px;
+   background-color: #39419AF0;
+   border: 1px solid;
 }
 
-#reset:hover{
-  animation: rotate 1s ease-in-out;
-  cursor: pointer;
+.timer-controls {
+   display: flex;
+   justify-content: space-between;
+   width: 60%;
 }
-@keyframes rotate{
-  100%{transform: rotate(360deg) }
+
+.timer-controls button {
+   background: none;
+   margin: 0 7px;
+   font-weight: bold;
+   font-size: 15px;
+   padding: none;
+   outline: none;
+   border: 1px solid;
+   color: white;
+   border-radius: 10px;
+   background-color: green;
+   cursor: pointer;
+}
+
+#reset:hover {
+   animation: rotate 1s ease-in-out;
+   cursor: pointer;
+}
+
+@keyframes rotate {
+   100% {
+      transform: rotate(360deg)
+   }
 }

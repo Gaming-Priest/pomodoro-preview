@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import Banner from './banner'
 
 
-//accurateInterval
+//ACCURATE INTERVAL JS
 function accurateInterval(func, interval, opts) {
    if (!opts) opts = {};
    var clear, nextAt, timeout, wrapper, now;
@@ -31,22 +31,25 @@ function accurateInterval(func, interval, opts) {
    };
 
 };
-//
+//ACCURATE INTERVAL JS
+
+
+
 // // APP COMPONENTS
+
 
 class App extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         breakInt: 5,
-         sessionInt: 25,
+         breakInt:5,
+         sessionInt:25,
+         timer:1500,
          counterColor: { color: 'wheat' },
-         timer: 1500,
          intID: '',
          isRunning: false,
          clockFace: 'session',
          id: 'beep',
-         src: 'https://raw.githubusercontent.com/Gaming-Priest/FCC-25-5-CLOCK/master/src/res/assets/Wecker-sound.mp3'
       }
       this.startClock = this.startClock.bind(this);
       this.decrementTimer = this.decrementTimer.bind(this);
@@ -147,7 +150,7 @@ class App extends Component {
 
    clockTime() {
       let minutes = Math.floor(this.state.timer / 60)
-      let seconds = this.state.timer - minutes * 60
+      let seconds = this.state.timer % 60
       minutes = minutes < 10 ? '0' + minutes : minutes
       seconds = seconds > 59 || seconds < 10 ? '0' + seconds : seconds
       return minutes + ':' + seconds
@@ -157,7 +160,7 @@ class App extends Component {
       if (int < 61) {
          this.setState({ counterColor: { color: '#F21515' } });
       } else {
-         this.setState({ counterColor: { color: wheat } });
+         this.setState({ counterColor: { color: 'wheat' } });
       }
    }
 
@@ -166,14 +169,14 @@ class App extends Component {
          this.refs.clockSound.play();
       }
    };
-
    reset() {
       this.setState({
-         timer: 1500,
-         breakInt: 5,
-         sessionInt: 25,
+         breakInt:5,
+         sessionInt:25,
+         timer:1500,
          isRunning: false,
          clockFace: 'session',
+         counterColor: { color: 'wheat' },
          intID: ''
       })
       if (this.state.intID) {
@@ -183,9 +186,9 @@ class App extends Component {
       this.refs.clockSound.currentTime = 0;
    };
 
-   render(){
+   render() {
       return (
-   <React.Fragment>
+         <React.Fragment>
    <Banner
        breakLen={this.state.breakInt}
        sessionLen={this.state.sessionInt}
@@ -199,7 +202,7 @@ class App extends Component {
        />
        <audio 
        id={this.state.id}
-       src="/res/assets/Wecker-sound.wav"
+       src="./res/assets/Wecker-sound.mp3"
        ref="clockSound"
        preload="auto"
        />
@@ -208,5 +211,7 @@ class App extends Component {
    }
 };
 
-var mountNode = document.getElementById("app");
-ReactDOM.render(<App />, mountNode);
+
+ReactDOM.render(<App />, document.getElementById('app'))
+
+//
